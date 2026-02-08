@@ -3,113 +3,172 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Rose Day Miss Piku ❤️</title>
+  <title>Happy Propose Day 💖</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Comic Sans MS', 'Segoe UI', sans-serif;
     }
 
     body {
       height: 100vh;
-      background: linear-gradient(135deg, #8b0000, #ff4d6d);
+      background: linear-gradient(135deg, #ffe29f, #ffa99f, #ff719a);
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      color: #fff;
+      color: #5a1a2c;
     }
 
     .card {
-      background: rgba(0, 0, 0, 0.35);
-      padding: 40px 30px;
-      border-radius: 20px;
+      background: #fff8fb;
+      padding: 32px 26px;
+      border-radius: 26px;
       max-width: 420px;
       text-align: center;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-      animation: fadeIn 1.5s ease;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      animation: popIn 1.2s ease;
     }
 
     h1 {
-      font-size: 2.4rem;
-      margin-bottom: 15px;
+      font-size: 2.1rem;
+      margin-bottom: 10px;
+      color: #ff4d6d;
+    }
+
+    .gif {
+      width: 190px;
+      margin: 16px auto;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.25);
+    }
+
+    .gif img {
+      width: 100%;
+      display: block;
     }
 
     p {
       font-size: 1.05rem;
       line-height: 1.7;
-      opacity: 0.95;
-      margin-bottom: 25px;
+      margin: 16px 0 22px;
     }
 
-    .rose {
-      font-size: 4rem;
-      margin-bottom: 15px;
-      animation: float 3s ease-in-out infinite;
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 10px;
+    }
+
+    button {
+      border: none;
+      padding: 12px 22px;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .yes {
+      background: #ff4d6d;
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(255,77,109,0.5);
+    }
+
+    .no {
+      background: #ffd6e0;
+      color: #5a1a2c;
+    }
+
+    button:hover {
+      transform: scale(1.1);
     }
 
     .from {
-      margin-top: 20px;
+      margin-top: 18px;
       font-size: 0.95rem;
-      opacity: 0.85;
+      opacity: 0.9;
     }
 
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
-      100% { transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.9); }
       to { opacity: 1; transform: scale(1); }
     }
 
-    /* falling petals */
-    .petal {
+    .heart {
       position: absolute;
-      top: -10px;
+      bottom: -10px;
       font-size: 18px;
+      animation: floatUp linear infinite;
       opacity: 0.8;
-      animation: fall linear infinite;
     }
 
-    @keyframes fall {
+    @keyframes floatUp {
       to {
-        transform: translateY(110vh) rotate(360deg);
+        transform: translateY(-110vh) rotate(360deg);
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="card">
-    <div class="rose">🌹</div>
-    <h1>Happy Rose Day
-        Miss Piku</h1>
+  <div class="card" id="card">
+    <h1>Happy Propose Day, Miss Piku 💕</h1>
+
+    <div class="gif">
+      <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbWJkY2V1eWZ4M2I3bDV2dnh0ZGFtZ3B6b2d0bTJrd2N0NW92dCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/l0MYt5jPR6QX5pnqM/giphy.gif" alt="cartoon proposal gif">
+    </div>
+
     <p>
-      This rose isn't just a flower,
-      it's a small piece of my heart.
-      Just like roses make the world softer,
-      you make my life warmer, calmer, and more beautiful.
-      Today and always, it's you.
+      Hey Miss Piku,
+      I may not go down on one knee today,
+      but my heart already has.
+      I choose you — in silly moments,
+      quiet talks, and all the tomorrows.
+      So… will you be mine? 🥺💖
     </p>
-    <div class="from">— Yours, Always
-                        Aman❤️</div>
+
+    <div class="buttons">
+      <button class="yes" onclick="sayYes()">YES 💘</button>
+      <button class="no" id="noBtn">NO 🙈</button>
+    </div>
+
+    <div class="from">— Yours, Aman 🫶</div>
   </div>
 
   <script>
-    const petals = ['🌹','🌸','💮'];
+    const hearts = ['❤️','💖','💕','💘'];
     for (let i = 0; i < 20; i++) {
-      const petal = document.createElement('div');
-      petal.className = 'petal';
-      petal.innerText = petals[Math.floor(Math.random() * petals.length)];
-      petal.style.left = Math.random() * 100 + 'vw';
-      petal.style.animationDuration = 5 + Math.random() * 5 + 's';
-      petal.style.fontSize = 14 + Math.random() * 20 + 'px';
-      document.body.appendChild(petal);
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 5 + Math.random() * 5 + 's';
+      heart.style.fontSize = 14 + Math.random() * 20 + 'px';
+      document.body.appendChild(heart);
+    }
+
+    const noBtn = document.getElementById('noBtn');
+    noBtn.addEventListener('mouseover', () => {
+      noBtn.style.position = 'absolute';
+      noBtn.style.left = Math.random() * 70 + '%';
+      noBtn.style.top = Math.random() * 70 + '%';
+    });
+
+    function sayYes() {
+      document.getElementById('card').innerHTML = `
+        <h1>YAYYYY 🥰💍</h1>
+        <p>
+          You just made Aman
+          the happiest person alive!
+          This is officially
+          our love story now 💖✨
+        </p>
+      `;
     }
   </script>
 
