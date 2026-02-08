@@ -166,12 +166,18 @@
   <audio id="outroMusic" src="https://assets.mixkit.co/music/preview/mixkit-emotional-piano-melody-483.mp3"></audio>
 
   <script>
-    // start background music on first interaction (browser friendly)
+    // start background music on first user interaction (safe for all browsers)
     const bgMusic = document.getElementById('bgMusic');
-    document.addEventListener('click', () => {
+    const startMusic = () => {
       if (bgMusic.paused) {
         bgMusic.volume = 0.35;
-        bgMusic.play();
+        bgMusic.play().catch(() => {});
+      }
+      document.removeEventListener('click', startMusic);
+      document.removeEventListener('touchstart', startMusic);
+    };
+    document.addEventListener('click', startMusic);
+    document.addEventListener('touchstart', startMusic);
       }
     }, { once: true });
     // floating hearts
